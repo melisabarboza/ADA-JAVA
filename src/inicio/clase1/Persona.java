@@ -1,5 +1,5 @@
 package inicio.clase1;
 
-public class Clase2 {
+public class Persona {
 
 }
