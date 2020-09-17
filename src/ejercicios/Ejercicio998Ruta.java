@@ -16,9 +16,7 @@ public class Ejercicio998Ruta {
 //     40            100            15      60
 	public static void main(String[] args) {
 
-		System.out.println("Sistema estaciones en ruta");
-		System.out.println("========================");
-		System.out.println();
+		mostrarTitulo();
 
 		Scanner sc = new Scanner(System.in);
 
@@ -27,15 +25,15 @@ public class Ejercicio998Ruta {
 
 		System.out.println();
 
-		int ciudades[] = new int[totalEstaciones];
+		int vectorCiudades[] = new int[totalEstaciones];
 		int acumulador = 0;
 		int i = 0;
-		for (; i < ciudades.length; i++) {
+		for (; i < vectorCiudades.length; i++) {
 
 			System.out.print("Ingrese km estacion " + (i + 1) + ":");
-			ciudades[i] = sc.nextInt();
+			vectorCiudades[i] = sc.nextInt();
 //          acumulador = acumulador + ciudades[i];
-			acumulador += ciudades[i];
+			acumulador += vectorCiudades[i];
 
 		}
 		sc.close();
@@ -56,6 +54,14 @@ public class Ejercicio998Ruta {
 		}
 	}
 
+	private static void mostrarTitulo() {
+
+		System.out.println("Sistema estaciones en ruta");
+		System.out.println("========================");
+		System.out.println();
+
+	}
+
 	/**
 	 * Dibuja el trayecto de una ciudad a otra
 	 */
@@ -64,11 +70,11 @@ public class Ejercicio998Ruta {
 		// por cada estacion (bucle), imprimo la cantidad de lineas segun km
 
 		for (int i = 0; i < distancia; i++) {
-			System.out.print("-");
+			System.out.print(" - ");
 		}
 
 		// imprimo un asterisco (*)
-		System.out.print("*");
+		System.out.print(" * ");
 
 	}
 
