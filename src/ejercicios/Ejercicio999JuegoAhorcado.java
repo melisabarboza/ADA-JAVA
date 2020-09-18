@@ -37,22 +37,24 @@ public class Ejercicio999JuegoAhorcado {
 		// pedir una letra
 		int aciertos = 0;
 		int errores = 0;
-		boolean[] resultado = new boolean[palabra.length()];
+		boolean[] letrasAcertadas = new boolean[palabra.length()];
 
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Ingrese una letra");
-		String letra = sc.next();
+		
 
-		// mientras cantidad letras acertadas < total letras
-		// y cantidad errores = 10
-		while (aciertos < palabra.length() && errores != MAX_ERRORES) {
+		
+		do {
+			System.out.println("Ingrese una letra");
+			String letra = sc.next();
 
 			// buscar esa letra en la palabra
 
+			//BUG1: si la letra aparece dos veces en la palabra, siempre devuelve el indice de la primer aparicin de la letra
 			int posicion = palabra.indexOf(letra); // si la letra no existe devuelve -1
-
-			if (posicion != -1) {
-				resultado[posicion] = posicion != -1;
+			boolean laLetraFueEncontrada = posicion != -1;
+			if (laLetraFueEncontrada) {
+				//BUG2: si siempre se ingresa la misma letra, entonces siempre se aumenta el contador de aciertos y la persona gana
+				letrasAcertadas[posicion] = true;
 				aciertos++;
 			} else {
 				errores++;
@@ -60,7 +62,7 @@ public class Ejercicio999JuegoAhorcado {
 
 			for (int i = 0; i < palabra.length(); i++) {
 				// si existe mostrar letra, contar acierto
-				if (resultado[i]) {
+				if (letrasAcertadas[i]) {
 					System.out.print(" " + palabra.charAt(i) + " ");
 				} else {
 					// sino mostrar _, contar error
@@ -72,11 +74,9 @@ public class Ejercicio999JuegoAhorcado {
 			// mostrar _ O _ _ (Errores: 0)
 			System.out.println("Errores: " + errores);
 
-			// pedir letra
-			System.out.println("Ingrese una letra");
-			letra = sc.next();
-
-		}
+		// mientras cantidad letras acertadas < total letras
+		// y cantidad errores = 10
+		} while (aciertos < palabra.length() && errores != MAX_ERRORES);
 
 		if (errores == MAX_ERRORES) {
 			System.out.println("Siga participando!!!");
@@ -95,8 +95,8 @@ public class Ejercicio999JuegoAhorcado {
 		// minimo 4 letras
 		// maximo 10 letras
 		while (palabra.length() < MIN_PALABRA || palabra.length() > MAX_PALABRA) {
-			System.out.println("La palabra tiene que tener como mÌnimo " + MIN_PALABRA);
-			System.out.println("La palabra tiene que tener como m·ximo " + MAX_PALABRA);
+			System.out.println("La palabra tiene que tener como m√≠nimo " + MIN_PALABRA);
+			System.out.println("La palabra tiene que tener como m√°ximo " + MAX_PALABRA);
 			System.out.println();
 			System.out.println("Ingrese palabra secreta");
 			palabra = sc.next();
