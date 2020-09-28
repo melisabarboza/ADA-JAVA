@@ -2,7 +2,7 @@
 *.class
 *.project
 *.classpath
-*.setting
+*.settings
 *.doc
 
 
