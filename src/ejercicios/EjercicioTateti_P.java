@@ -26,43 +26,71 @@ public class EjercicioTateti_P {
 
 		// MIENTRAS NO HAYA GANADOR
 		boolean ganador = false;
+		boolean jugadaValida = false;
 		int contador = 0;
-		int turno = 1;
+		int turno = 0;
+		
 		System.out.println("JUEGO TA-TE-TI");
 		System.out.println("**************");
 		System.out.println();
 		imprimir(tablero);
+		
+		//mientras no haya ganado un jugador Y mientras no hayan escrito todas las posiciones del tablero
 		while (!ganador && contador < 9) {
 			// JUGAR FICHA
-			contador++;
 			turno = contador % 2;
-			ganador = jugarFicha(turno, tablero);
+			jugadaValida = jugarFicha(turno, tablero);
+			ganador = verificar(tablero);
+			imprimir(tablero);
+			if (ganador) {
+				System.out.println("GANASTE!!! JUGADOR " + (turno+1));
+			}
+			if(jugadaValida){
+				contador++;
+			}
+		}
+		if(!ganador) {
+			System.out.println("Lamentablemente este juego quedó en empate");
 		}
 	}
+	
+	
 
 	private static boolean jugarFicha(int turno, char[][] tablero) {
+		
 		Scanner sc = new Scanner(System.in);
-		System.out.println("JUGADOR " + (turno + 1) + " Ingrese fila : ");
+		
+		System.out.println("JUGADOR " + (turno +1)+ " Ingrese fila : ");
+		
 		int fila = sc.nextInt();
+		if(fila > 2 || fila < 0) {
+			System.out.println("El valor de la fila debe ser entre 0 y 2");
+			return false;
+		}
+		
 		System.out.println("Ingrese columna: ");
+		
 		int columna = sc.nextInt();
-		boolean ganador = false;
+		if(columna > 2 || columna < 0) {
+			System.out.println("El valor de la columna debe ser entre 0 y 2");
+			return false;
+		}
+		
+		boolean movimientoValido = false;
+		
 		if (tablero[fila][columna] == 'X' || tablero[fila][columna] == 'O') {
 			System.out.println("Jugada no valida");
+			movimientoValido = false;
 		} else {
+			movimientoValido = true;
 			if (turno == 0) {
 				tablero[fila][columna] = 'X';
 			} else {
 				tablero[fila][columna] = 'O';
 			}
-			ganador = verificar(tablero);
-			imprimir(tablero);
-			if (ganador) {
-				System.out.println("GANASTE!!! JUGADOR " + turno);
-			}
 		}
 
-		return ganador;
+		return movimientoValido;
 	}
 
 	private static boolean verificar(char[][] tablero) {
@@ -90,14 +118,19 @@ public class EjercicioTateti_P {
 	}
 
 	private static void imprimir(char[][] tablero) {
-		System.out.println("[");
 		for (int fila = 0; fila < FILAS; fila++) {
 			for (int col = 0; col < COLS; col++) {
 				System.out.print(" " + tablero[fila][col] + " ");
+				if(col<2) {
+					System.out.print("|");
+				}
 			}
 			System.out.println();
+			if(fila<2) {
+				System.out.println("---|---|---");
+			}
 		}
-		System.out.println("]");
+		System.out.println();
 
 	}
 }
