@@ -1,4 +1,4 @@
-package inicio;
+package inicio.bicicleta;
 
 public class Menu {
 
