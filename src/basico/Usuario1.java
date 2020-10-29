@@ -1,6 +1,6 @@
-package inicio.clase1;
+package basico;
 
-public class Usuario {
+public class Usuario1 {
 
 	// declaro atributos
 

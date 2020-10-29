@@ -4,38 +4,59 @@ import java.util.Scanner;
 
 public class AppEnvios {
 
+	// Tarea
+	// Enviar paquetes, cartas, dinero
+	// Programar clases para distintos servicios con
+	// sus métodos y atributos
+
 	public static void main(String[] args) {
+
+		Paquete.showMessage("bienvenido/a");
 		System.out.println("Sistema de envios");
 		System.out.println();
 
-		float pesoEnvio = solicitarPesoEnvio();
-		int zona;
+		calcularEnvio();
+
+		Paquete.showMessage("nos vemos");
+	}
+
+	private static void calcularEnvio() {
+
+		float pesoEnvio = solicitarPeso();
+		int zonaEnvio;
+		;
 		while (pesoEnvio != 0) {
-			zona = solicitudZona();
-			Paquete paq = new Paquete();
-			paq.setPeso(pesoEnvio);
-			if (paq.isEnviable()) {
-				paq.setZona(zona);
-				float precioTotal = paq.calcularPrecio();
-				System.out.println("El valor del envio es: " + precioTotal);
+			zonaEnvio = solicitarZona();
+
+			Paquete paq = new Paquete(pesoEnvio, zonaEnvio);
+
+			// Paquete paq = Paquete.crear();
+			// paq.setPeso(pesoEnvio);
+
+			if (paq.isTransportable()) {
+				// paq.setZona(zonaEnvio);
+				float precioT = paq.calcularPrecio();
+				System.out.println("El valor del envio es: " + precioT);
+				System.out.println();
 			} else {
-				System.out.println("El paquete no se puede enviar");
+				Paquete.showErr("El paquete es muy pesado");
+				System.out.println();
 			}
-			pesoEnvio = solicitarPesoEnvio();
+
+			pesoEnvio = solicitarPeso();
 		}
 	}
 
-	private static int solicitudZona() {
-		System.out.println("Ingrese zona de envio:");
-		Scanner sc = new Scanner(System.in);
-		return sc.nextInt();
+	private static int solicitarZona() {
+		System.out.print("Ingrese zona del paquete: ");
+		Scanner scan = new Scanner(System.in);
+		return scan.nextInt();
 	}
 
-	private static float solicitarPesoEnvio() {
-		System.out.println("Ingrese peso del envio: (0=Finalizar)");
-		Scanner sc = new Scanner(System.in);
-
-		return sc.nextFloat();
+	private static float solicitarPeso() {
+		System.out.println();
+		System.out.print("Ingrese peso del paquete (0 Salir): ");
+		Scanner scan = new Scanner(System.in);
+		return scan.nextFloat();
 	}
-
 }
