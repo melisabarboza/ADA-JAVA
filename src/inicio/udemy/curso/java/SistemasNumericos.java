@@ -1,10 +1,13 @@
 package inicio.udemy.curso.java;
 
+import javax.swing.JOptionPane;
+
 public class SistemasNumericos {
 
 	public static void main(String[] args) {
 
-		int numeroDecimal = 500;
+		String numeroStr = JOptionPane.showInputDialog(null, "Ingrese un numero");
+		int numeroDecimal = Integer.parseInt(numeroStr);
 		System.out.println("numeroDecimal = " + numeroDecimal);
 
 		System.out.println("numero binario de " + numeroDecimal + " = " + Integer.toBinaryString(numeroDecimal));
